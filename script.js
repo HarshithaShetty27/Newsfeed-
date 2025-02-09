@@ -1,5 +1,7 @@
-const API_KEY= "78cb92e78a6e4c448902e593f576b531";
-const url= "https://newsapi.org/v2/everything?q="
+// const API_KEY= "78cb92e78a6e4c448902e593f576b531";
+// const url= "https://newsapi.org/v2/everything?q="
+
+const url = "http://localhost:5000/news?q=";
 
 window.addEventListener('load',()=>fetchNews("India"));
 
@@ -15,13 +17,8 @@ function reload(){
 
 async function fetchNews(query) {
     try {
-        const response = await fetch(`${url}${query}&apiKey=${API_KEY}`, {
-            headers: {
-                "Accept": "application/json",
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-            }
-        });
-
+        const response = await fetch(`${url}${query}`);
+        
         if (!response.ok) {
             throw new Error(`API Error: ${response.status} - ${response.statusText}`);
         }
@@ -32,7 +29,6 @@ async function fetchNews(query) {
         console.error("Error fetching news:", error.message);
     }
 }
-
 
 function bindData(articles){
     const cardsContainer= document.getElementById("cards-container");
